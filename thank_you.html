@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <style>
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(45deg, #FF6B6B, #F4A261, #2EC4B6, #A9DEF9);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .thank-you-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            backdrop-filter: blur(10px); /* Adds a frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+        }
+
+        h1 {
+            color: #E76F51; /* Vibrant heading color */
+            font-size: 3em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #3A506B; /* Darker text for contrast */
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #84A59D; /* Muted but distinct link color */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+            border-bottom: 2px dotted #84A59D; /* Underline style */
+            padding-bottom: 3px;
+        }
+
+        a:hover {
+            color: #F2B884; /* Highlight color on hover */
+            text-decoration: none;
+            transform: scale(1.05);
+            border-bottom: 2px solid #F2B884;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: confettiRain 5s linear infinite;
+        }
+
+        @keyframes confettiRain {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="thank-you-container">
+        <h1>🎉 Thank You, {{ name }}! 🎉</h1>
+        <p>Your feedback has soared through cyberspace and landed safely in our digital inbox. We truly appreciate you taking the time to share your thoughts!</p>
+        <p>Ready for another adventure? Click <a href="/">here</a> to return to the launchpad.</p>
+    </div>
+
+    <script>
+        // Function to create confetti elements
+        function createConfetti() {
+            const container = document.querySelector('.thank-you-container');
+            const colors = ['#FF6B6B', '#F4A261', '#2EC4B6', '#A9DEF9', '#E76F51', '#F2B884', '#84A59D'];
+            const count = 100; // Number of confetti pieces
+
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.backgroundColor = color;
+                const startX = Math.random() * container.offsetWidth;
+                const startY = Math.random() * -200;
+                const size = Math.random() * 10 + 5;
+                const animationDelay = Math.random() * 5;
+                const rotation = Math.random() * 360;
+
+                confetti.style.left = `${container.offsetLeft + startX}px`;
+                confetti.style.top = `${container.offsetTop + startY}px`;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.animationDelay = `${animationDelay}s`;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Call the function to create confetti when the page loads
+        window.onload = createConfetti;
+    </script>
+</body>
+</html>

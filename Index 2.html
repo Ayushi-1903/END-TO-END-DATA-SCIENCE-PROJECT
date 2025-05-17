@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Pass Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .result {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will the Student Pass?</h1>
+    <form method="POST" action="/predict">
+        <label>Python Score:</label>
+        <input type="number" step="any" name="python" required>
+
+        <label>C Programming Score:</label>
+        <input type="number" step="any" name="c_program" required>
+
+        <label>DSA Score:</label>
+        <input type="number" step="any" name="dsa" required>
+
+        <label>DMP Score:</label>
+        <input type="number" step="any" name="dmp" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <h2>Prediction Result: {{ result }}</h2>
+        <ul>
+            <li>Python Score: {{ python }}</li>
+            <li>C Programming Score: {{ c_program }}</li>
+            <li>DSA Score: {{ dsa }}</li>
+            <li>DMP Score: {{ dmp }}</li>
+        </ul>
+        <p><strong>Average Score (as probability):</strong> {{ probability }}%</p>
+    </div>
+    {% endif %}
+</body>
+</html>
